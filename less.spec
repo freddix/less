@@ -1,17 +1,16 @@
 Summary:	Text file browser
 Name:		less
-Version:	444
-Release:	2
+Version:	458
+Release:	1
 License:	GPL v2
 Group:		Applications/Text
 Source0:	http://www.greenwoodsoftware.com/less/%{name}-%{version}.tar.gz
-# Source0-md5:	56f9f76ffe13f70155f47f6b3c87d421
+# Source0-md5:	935b38aa2e73c888c210dedf8fd94f49
 Source1:	lesspipe.sh
-Patch0:		%{name}-shell.patch
-Patch1:		%{name}-libtinfo.patch
 URL:		http://www.greenwoodsoftware.com/less/
 BuildRequires:	autoconf
 BuildRequires:	ncurses-devel
+BuildRequires:	pcre-devel
 Requires:	file
 Requires:	setup
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -21,15 +20,13 @@ The less utility is a text file browser that resembles more.
 
 %prep
 %setup  -q
-%patch0 -p1
-%patch1 -p1
 
 %build
 chmod -R u+w .
 %{__autoconf}
-%configure
-%{__make} \
-	CPPFLAGS="-D_GNU_SOURCE -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64"
+%configure \
+	--with-regex=pcre
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT

@@ -1,7 +1,7 @@
 Summary:	Text file browser
 Name:		less
 Version:	458
-Release:	1
+Release:	2
 License:	GPL v2
 Group:		Applications/Text
 Source0:	http://www.greenwoodsoftware.com/less/%{name}-%{version}.tar.gz
